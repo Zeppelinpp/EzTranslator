@@ -54,7 +54,7 @@
 
   <text x="186" y="144" font-size="42" font-weight="800" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-1.2" fill="#0F172A">EzTranslator</text>
 
-  <text x="94" y="232" font-size="60" font-weight="820" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-2.1" fill="#0F172A">Translate without leaving your flow.</text>
+  <text x="94" y="224" font-size="50" font-weight="820" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-1.7" fill="#0F172A">Translate without leaving your flow.</text>
   <text x="94" y="278" font-size="24" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">Hold Right Option to see a compact translation popup exactly where you are working.</text>
 
   <rect x="94" y="314" width="164" height="44" rx="22" fill="#0F172A"/>
@@ -69,26 +69,26 @@
   <text x="126" y="447" font-size="22" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Why it feels fast</text>
   <text x="126" y="486" font-size="18" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#334155">Compact popup near cursor  ·  No selection required for single words  ·  Selected text with the same shortcut</text>
 
-  <rect x="872" y="120" width="434" height="292" rx="30" fill="#F8FBFF"/>
-  <rect x="872.75" y="120.75" width="432.5" height="290.5" rx="29.25" stroke="#D9E8F8" stroke-width="1.5"/>
-  <text x="908" y="166" font-size="18" font-weight="700" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Source text</text>
-  <text x="1172" y="166" font-size="16" font-weight="650" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">hover a word</text>
-  <rect x="908" y="192" width="252" height="16" rx="8" fill="#CBD5E1"/>
-  <rect x="908" y="220" width="214" height="16" rx="8" fill="#CBD5E1"/>
-  <rect x="908" y="248" width="282" height="16" rx="8" fill="#CBD5E1"/>
-  <rect x="908" y="276" width="186" height="16" rx="8" fill="#93C5FD"/>
-  <rect x="908" y="324" width="136" height="16" rx="8" fill="#E2E8F0"/>
-  <rect x="908" y="352" width="222" height="16" rx="8" fill="#E2E8F0"/>
+  <rect x="944" y="120" width="362" height="292" rx="30" fill="#F8FBFF"/>
+  <rect x="944.75" y="120.75" width="360.5" height="290.5" rx="29.25" stroke="#D9E8F8" stroke-width="1.5"/>
+  <text x="976" y="166" font-size="18" font-weight="700" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Source text</text>
+  <text x="1168" y="166" font-size="16" font-weight="650" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">hover a word</text>
+  <rect x="976" y="192" width="220" height="16" rx="8" fill="#CBD5E1"/>
+  <rect x="976" y="220" width="186" height="16" rx="8" fill="#CBD5E1"/>
+  <rect x="976" y="248" width="248" height="16" rx="8" fill="#CBD5E1"/>
+  <rect x="976" y="276" width="164" height="16" rx="8" fill="#93C5FD"/>
+  <rect x="976" y="324" width="122" height="16" rx="8" fill="#E2E8F0"/>
+  <rect x="976" y="352" width="194" height="16" rx="8" fill="#E2E8F0"/>
 
   <g filter="url(#popupShadow)">
-    <rect x="902" y="214" width="338" height="214" rx="28" fill="url(#softCard)"/>
-    <rect x="902.75" y="214.75" width="336.5" height="212.5" rx="27.25" stroke="#D9E8F8" stroke-width="1.5"/>
+    <rect x="886" y="214" width="320" height="214" rx="28" fill="url(#softCard)"/>
+    <rect x="886.75" y="214.75" width="318.5" height="212.5" rx="27.25" stroke="#D9E8F8" stroke-width="1.5"/>
   </g>
-  <text x="936" y="268" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Original</text>
-  <text x="936" y="305" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">cursor</text>
-  <rect x="936" y="326" width="270" height="1" fill="#E2E8F0"/>
-  <text x="936" y="362" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Translation</text>
-  <text x="936" y="400" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">光标</text>
+  <text x="918" y="268" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Original</text>
+  <text x="918" y="305" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">cursor</text>
+  <rect x="918" y="326" width="256" height="1" fill="#E2E8F0"/>
+  <text x="918" y="362" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Translation</text>
+  <text x="918" y="400" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">光标</text>
 
   <rect x="1084" y="444" width="222" height="82" rx="24" fill="#F8FBFF"/>
   <rect x="1084.75" y="444.75" width="220.5" height="80.5" rx="23.25" stroke="#D9E8F8" stroke-width="1.5"/>
