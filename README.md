@@ -1,20 +1,23 @@
 # EzTranslator
 
-A minimal floating translator for macOS.
+#### Minimal floating translator for macOS
 
-Inspired by the instant lookup workflow in tools like EasyDict, but focused on an even more compact, flow-first experience.
+`EzTranslator` is a lightweight menu bar translator for looking up words and translating selected text on macOS.
 
-Hold `Right Option` to translate what is under your cursor without switching apps, selecting text, or breaking attention.
+EzTranslator is designed around a very small interaction surface: hold `Right Option`, see a compact floating translation near your cursor, then continue what you were doing. No app switching, no heavy panel, no extra workflow.
 
-## Why EzTranslator (vs traditional popup translators)
+It supports both local models through `Ollama` and bring-your-own-key setups through any OpenAI-compatible API provider.
 
-- **Extreme lightweight**: menu bar app, fast startup, very low friction.
-- **Compact UI**: small floating window for glance-level reading.
-- **No context switch**: translation appears right next to your cursor.
-- **Flow preserved**: hold `Right Option`, see result, continue what you were doing.
-- **Word hover translation**: single word lookup without manual selection.
-- **Selection translation**: highlighted text is translated directly.
-- **Local-first + BYOK**: use local Ollama or any OpenAI-compatible provider.
+## Features
+
+- Lightweight menu bar app with fast startup and minimal friction.
+- Compact floating UI for glance-level reading.
+- Hold `Right Option` to translate a single word under the cursor.
+- Translate selected text with the same flow.
+- Dynamic popup sizing and adaptive positioning near screen edges.
+- Native macOS `Settings` window for provider and prompt configuration.
+- Support local `Ollama` models.
+- Support OpenAI-compatible providers with configurable `base URL`, `model`, and `API key`.
 
 ## Translation Providers
 
@@ -23,24 +26,46 @@ EzTranslator supports two providers from Settings:
 - `Ollama` (local model, configurable model name, e.g. `qwen2.5:0.5b`)
 - `OpenAI-Compatible` (configurable `model`, `base URL`, `API key`)
 
-## Core Experience
+## Why EzTranslator
 
-1. Move cursor to a word.
-2. Hold `Right Option`.
-3. Get an instant compact translation popup near cursor.
-4. Release key and continue working.
+- **Flow-first**: the main interaction is hold-to-translate, so translation does not take over your screen.
+- **Minimal UI**: the popup is intentionally compact instead of trying to become a full translation workspace.
+- **Good fit for quick word lookup**: especially useful when you only need an instant translation for one word or a short phrase.
+- **Local-first optionality**: works well with local models, but does not lock you into them.
 
-## Usage
+## Installation
 
-1. Build and install:
+### Build from source
 
 ```bash
 bash build.sh
 ```
 
-2. Launch the app from `/Applications/FloatTranslator.app`.
-3. Open `Settings...` from the menu bar icon to configure provider, model, prompt, and keys.
-4. Hold `Right Option` to trigger hover/selection translation.
+The app will be installed to `/Applications/FloatTranslator.app`.
+
+## Usage
+
+Mode | How it works
+--- | ---
+Hover word translation | Move the cursor over a word and hold `Right Option`
+Selection translation | Select text first, then hold `Right Option`
+Provider configuration | Open `Settings...` from the menu bar icon
+
+## Settings
+
+In `Settings...`, you can configure:
+
+- Translation provider
+- Ollama model
+- OpenAI-compatible base URL
+- OpenAI-compatible model
+- OpenAI-compatible API key
+- System prompt
+
+## Permissions
+
+- Screen Recording permission is required for hover OCR translation.
+- Accessibility permission is required for selected-text translation.
 
 ## Screenshot Tips
 
@@ -50,8 +75,3 @@ For marketing screenshots, use macOS delayed screenshot:
 2. Set timer to `5s` or `10s`.
 3. Start capture, then hold `Right Option` to show the popup.
 4. The screenshot is taken automatically while the popup is visible.
-
-## Notes
-
-- For hover OCR translation, macOS Screen Recording permission is required.
-- For selected-text translation, Accessibility permission is required.
