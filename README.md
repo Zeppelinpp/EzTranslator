@@ -1,6 +1,22 @@
-# EzTranslator
+<p align="center">
+  <img src="docs/branding/eztranslator-logo.svg" alt="EzTranslator" width="520">
+</p>
 
-#### Minimal floating translator for macOS
+<p align="center">
+  Minimal floating translator for macOS
+</p>
+
+<p align="center">
+  Hold <code>Right Option</code> to translate a word instantly without switching apps, selecting text first, or breaking your flow.
+</p>
+
+<p align="center">
+  <img src="docs/branding/eztranslator-hero.svg" alt="EzTranslator product hero" width="960">
+</p>
+
+<p align="center">
+  Compact UI · Hover word translation · Selection translation · Ollama · OpenAI-compatible BYOK
+</p>
 
 `EzTranslator` is a lightweight menu bar translator for looking up words and translating selected text on macOS.
 
