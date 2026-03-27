@@ -34,9 +34,4 @@
 
   <text x="216" y="102" font-size="64" font-weight="800" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" letter-spacing="-2" fill="#0F172A">EzTranslator</text>
   <text x="220" y="142" font-size="23" font-weight="560" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#475569">Minimal floating translation for macOS</text>
-
-  <rect x="612" y="76" width="168" height="38" rx="19" fill="#DBEAFE"/>
-  <text x="696" y="101" text-anchor="middle" font-size="16" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#1D4ED8">Flow-first</text>
-  <rect x="612" y="122" width="168" height="38" rx="19" fill="#DCFCE7"/>
-  <text x="696" y="147" text-anchor="middle" font-size="16" font-weight="700" font-family="-apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif" fill="#047857">Hover to translate</text>
 </svg>
