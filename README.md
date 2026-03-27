@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/branding/eztranslator-logo.svg" alt="EzTranslator" width="520">
+  <img src="docs/branding/eztranslator-logo.svg" alt="EzTranslator" width="480">
 </p>
 
 <p align="center">
@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/branding/eztranslator-hero.svg" alt="EzTranslator product hero" width="960">
+  <img src="docs/branding/eztranslator-hero.svg" alt="EzTranslator product hero" width="100%">
 </p>
 
 <p align="center">

@@ -1,4 +1,4 @@
-<svg width="1280" height="760" viewBox="0 0 1280 760" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="1440" height="620" viewBox="0 0 1440 620" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">EzTranslator hero banner</title>
   <desc id="desc">A clean product banner for EzTranslator showing a compact floating translation popup and a flow-first interface.</desc>
   <defs>
@@ -24,78 +24,74 @@
       <stop stop-color="#6EE7B7" stop-opacity="0.44"/>
       <stop offset="1" stop-color="#6EE7B7" stop-opacity="0"/>
     </radialGradient>
-    <filter id="panelShadow" x="36" y="52" width="1208" height="656" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="panelShadow" x="28" y="34" width="1384" height="564" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="24" stdDeviation="22" flood-color="#0F172A" flood-opacity="0.14"/>
     </filter>
-    <filter id="popupShadow" x="644" y="238" width="430" height="288" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+    <filter id="popupShadow" x="856" y="186" width="430" height="288" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
       <feDropShadow dx="0" dy="18" stdDeviation="16" flood-color="#0F172A" flood-opacity="0.18"/>
     </filter>
   </defs>
 
-  <rect width="1280" height="760" rx="40" fill="url(#pageBg)"/>
-  <rect width="1280" height="760" rx="40" fill="url(#glowA)"/>
-  <rect width="1280" height="760" rx="40" fill="url(#glowB)"/>
+  <rect width="1440" height="620" rx="40" fill="url(#pageBg)"/>
+  <rect width="1440" height="620" rx="40" fill="url(#glowA)"/>
+  <rect width="1440" height="620" rx="40" fill="url(#glowB)"/>
 
   <g filter="url(#panelShadow)">
-    <rect x="58" y="74" width="1164" height="612" rx="34" fill="#FFFFFF" fill-opacity="0.94"/>
-    <rect x="58.75" y="74.75" width="1162.5" height="610.5" rx="33.25" stroke="#D9E8F8" stroke-width="1.5"/>
+    <rect x="52" y="56" width="1336" height="508" rx="34" fill="#FFFFFF" fill-opacity="0.95"/>
+    <rect x="52.75" y="56.75" width="1334.5" height="506.5" rx="33.25" stroke="#D9E8F8" stroke-width="1.5"/>
   </g>
 
-  <rect x="100" y="114" width="72" height="72" rx="22" fill="url(#brand)"/>
-  <rect x="114" y="128" width="38" height="26" rx="10" fill="#FFFFFF" fill-opacity="0.98"/>
-  <path d="M129 154L123 165L135 156" fill="#FFFFFF" fill-opacity="0.98"/>
-  <path d="M123 138H142" stroke="#0F172A" stroke-width="3.8" stroke-linecap="round" stroke-opacity="0.85"/>
-  <path d="M123 147H136" stroke="#0F172A" stroke-width="3.8" stroke-linecap="round" stroke-opacity="0.54"/>
-  <rect x="141" y="149" width="19" height="16" rx="6" fill="#0F172A" fill-opacity="0.94"/>
-  <path d="M147.5 153L145 161" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M154 153L156.5 161" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M145.5 158.5H156.5" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M151 151V163" stroke="#34D399" stroke-width="1.9" stroke-linecap="round"/>
+  <rect x="94" y="96" width="72" height="72" rx="22" fill="url(#brand)"/>
+  <rect x="108" y="110" width="38" height="26" rx="10" fill="#FFFFFF" fill-opacity="0.98"/>
+  <path d="M123 136L117 147L129 138" fill="#FFFFFF" fill-opacity="0.98"/>
+  <path d="M117 120H136" stroke="#0F172A" stroke-width="3.8" stroke-linecap="round" stroke-opacity="0.85"/>
+  <path d="M117 129H130" stroke="#0F172A" stroke-width="3.8" stroke-linecap="round" stroke-opacity="0.54"/>
+  <rect x="135" y="131" width="19" height="16" rx="6" fill="#0F172A" fill-opacity="0.94"/>
+  <path d="M141.5 135L139 143" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M148 135L150.5 143" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M139.5 140.5H150.5" stroke="#F8FAFC" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M145 133V145" stroke="#34D399" stroke-width="1.9" stroke-linecap="round"/>
 
-  <text x="192" y="162" font-size="42" font-weight="800" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-1.2" fill="#0F172A">EzTranslator</text>
+  <text x="186" y="144" font-size="42" font-weight="800" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-1.2" fill="#0F172A">EzTranslator</text>
 
-  <text x="100" y="264" font-size="58" font-weight="820" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-2" fill="#0F172A">Translate without leaving your flow.</text>
-  <text x="100" y="314" font-size="24" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">Hold Right Option to see a compact translation popup right where you are working.</text>
+  <text x="94" y="232" font-size="60" font-weight="820" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" letter-spacing="-2.1" fill="#0F172A">Translate without leaving your flow.</text>
+  <text x="94" y="278" font-size="24" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">Hold Right Option to see a compact translation popup exactly where you are working.</text>
 
-  <rect x="100" y="356" width="164" height="44" rx="22" fill="#0F172A"/>
-  <text x="182" y="384" text-anchor="middle" font-size="17" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#F8FAFC">Flow-first</text>
-  <rect x="278" y="356" width="196" height="44" rx="22" fill="#DBEAFE"/>
-  <text x="376" y="384" text-anchor="middle" font-size="17" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#1D4ED8">Hover word translation</text>
-  <rect x="488" y="356" width="186" height="44" rx="22" fill="#DCFCE7"/>
-  <text x="581" y="384" text-anchor="middle" font-size="17" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#047857">Local or BYOK</text>
+  <rect x="94" y="314" width="164" height="44" rx="22" fill="#0F172A"/>
+  <text x="176" y="342" text-anchor="middle" font-size="17" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#F8FAFC">Flow-first</text>
+  <rect x="272" y="314" width="196" height="44" rx="22" fill="#DBEAFE"/>
+  <text x="370" y="342" text-anchor="middle" font-size="17" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#1D4ED8">Hover word translation</text>
+  <rect x="482" y="314" width="186" height="44" rx="22" fill="#DCFCE7"/>
+  <text x="575" y="342" text-anchor="middle" font-size="17" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#047857">Local or BYOK</text>
 
-  <rect x="100" y="456" width="520" height="164" rx="28" fill="#F8FBFF"/>
-  <rect x="100.75" y="456.75" width="518.5" height="162.5" rx="27.25" stroke="#D9E8F8" stroke-width="1.5"/>
-  <text x="132" y="505" font-size="22" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Why it feels fast</text>
-  <text x="132" y="546" font-size="18" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#334155">Compact popup near cursor</text>
-  <text x="132" y="578" font-size="18" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#334155">Single-word hover translation with no selection required</text>
-  <text x="132" y="610" font-size="18" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#334155">Selected text translation with the same shortcut</text>
+  <rect x="94" y="404" width="612" height="122" rx="28" fill="#F8FBFF"/>
+  <rect x="94.75" y="404.75" width="610.5" height="120.5" rx="27.25" stroke="#D9E8F8" stroke-width="1.5"/>
+  <text x="126" y="447" font-size="22" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Why it feels fast</text>
+  <text x="126" y="486" font-size="18" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#334155">Compact popup near cursor  ·  No selection required for single words  ·  Selected text with the same shortcut</text>
 
-  <rect x="756" y="164" width="356" height="360" rx="30" fill="#F8FBFF"/>
-  <rect x="756.75" y="164.75" width="354.5" height="358.5" rx="29.25" stroke="#D9E8F8" stroke-width="1.5"/>
-  <text x="790" y="212" font-size="18" font-weight="700" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Source text</text>
-  <rect x="790" y="236" width="206" height="16" rx="8" fill="#CBD5E1"/>
-  <rect x="790" y="264" width="174" height="16" rx="8" fill="#CBD5E1"/>
-  <rect x="790" y="292" width="232" height="16" rx="8" fill="#CBD5E1"/>
-  <rect x="790" y="320" width="154" height="16" rx="8" fill="#93C5FD"/>
-  <rect x="790" y="362" width="94" height="16" rx="8" fill="#E2E8F0"/>
-  <rect x="790" y="390" width="182" height="16" rx="8" fill="#E2E8F0"/>
-  <rect x="790" y="418" width="144" height="16" rx="8" fill="#E2E8F0"/>
-  <rect x="790" y="456" width="110" height="16" rx="8" fill="#DBEAFE"/>
-  <text x="1012" y="214" font-size="16" font-weight="650" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">hover a word</text>
+  <rect x="872" y="120" width="434" height="292" rx="30" fill="#F8FBFF"/>
+  <rect x="872.75" y="120.75" width="432.5" height="290.5" rx="29.25" stroke="#D9E8F8" stroke-width="1.5"/>
+  <text x="908" y="166" font-size="18" font-weight="700" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">Source text</text>
+  <text x="1172" y="166" font-size="16" font-weight="650" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">hover a word</text>
+  <rect x="908" y="192" width="252" height="16" rx="8" fill="#CBD5E1"/>
+  <rect x="908" y="220" width="214" height="16" rx="8" fill="#CBD5E1"/>
+  <rect x="908" y="248" width="282" height="16" rx="8" fill="#CBD5E1"/>
+  <rect x="908" y="276" width="186" height="16" rx="8" fill="#93C5FD"/>
+  <rect x="908" y="324" width="136" height="16" rx="8" fill="#E2E8F0"/>
+  <rect x="908" y="352" width="222" height="16" rx="8" fill="#E2E8F0"/>
 
   <g filter="url(#popupShadow)">
-    <rect x="690" y="266" width="338" height="214" rx="28" fill="url(#softCard)"/>
-    <rect x="690.75" y="266.75" width="336.5" height="212.5" rx="27.25" stroke="#D9E8F8" stroke-width="1.5"/>
+    <rect x="902" y="214" width="338" height="214" rx="28" fill="url(#softCard)"/>
+    <rect x="902.75" y="214.75" width="336.5" height="212.5" rx="27.25" stroke="#D9E8F8" stroke-width="1.5"/>
   </g>
-  <text x="724" y="320" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Original</text>
-  <text x="724" y="357" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">cursor</text>
-  <rect x="724" y="378" width="270" height="1" fill="#E2E8F0"/>
-  <text x="724" y="414" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Translation</text>
-  <text x="724" y="452" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">光标</text>
+  <text x="936" y="268" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Original</text>
+  <text x="936" y="305" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">cursor</text>
+  <rect x="936" y="326" width="270" height="1" fill="#E2E8F0"/>
+  <text x="936" y="362" font-size="15" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#64748B">Translation</text>
+  <text x="936" y="400" font-size="31" font-weight="760" font-family="SF Pro Display, Inter, Segoe UI, sans-serif" fill="#0F172A">光标</text>
 
-  <rect x="930" y="568" width="182" height="88" rx="24" fill="#F8FBFF"/>
-  <rect x="930.75" y="568.75" width="180.5" height="86.5" rx="23.25" stroke="#D9E8F8" stroke-width="1.5"/>
-  <text x="958" y="605" font-size="16" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#0F172A">Providers</text>
-  <text x="958" y="632" font-size="15" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">Ollama or OpenAI-compatible</text>
+  <rect x="1084" y="444" width="222" height="82" rx="24" fill="#F8FBFF"/>
+  <rect x="1084.75" y="444.75" width="220.5" height="80.5" rx="23.25" stroke="#D9E8F8" stroke-width="1.5"/>
+  <text x="1118" y="478" font-size="16" font-weight="700" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#0F172A">Providers</text>
+  <text x="1118" y="505" font-size="15" font-weight="560" font-family="SF Pro Text, Inter, Segoe UI, sans-serif" fill="#475569">Ollama or OpenAI-compatible</text>
 </svg>
