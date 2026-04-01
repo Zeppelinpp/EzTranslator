@@ -94,9 +94,13 @@ class TranslatorService {
             return
         }
 
-        URLSession.shared.dataTask(with: urlRequest) { data, _, error in
+        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
             if let error = error {
                 completion(.failure("Error: \(error.localizedDescription)"))
+                return
+            }
+            guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+                completion(.failure("Request failed"))
                 return
             }
             guard let data = data else {
@@ -117,7 +121,8 @@ class TranslatorService {
     }
 
     private func openAIEndpointURL(from baseURLString: String) -> URL {
-        let fallback = URL(string: "\(AppSettings.defaultOpenAIBaseURL)/\(openAICompletionsPath)")!
+        let fallbackString = "\(AppSettings.defaultOpenAIBaseURL)/\(openAICompletionsPath)"
+        let fallback = URL(string: fallbackString) ?? URL(string: "https://api.openai.com/v1/chat/completions")!
         let trimmed = baseURLString.trimmingCharacters(in: .whitespacesAndNewlines)
         guard let baseURL = URL(string: trimmed), !trimmed.isEmpty else {
             return fallback
