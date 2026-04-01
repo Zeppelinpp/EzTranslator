@@ -29,9 +29,7 @@ class ShareViewController: UIViewController {
                 return
             }
 
-            let defaults = UserDefaults(suiteName: AppSettings.appGroupID)
-            defaults?.set(text, forKey: "pendingTranslationText")
-            defaults?.synchronize()
+            self?.enqueueTranslation(text: text)
 
             if let url = URL(string: "floattranslator://translate") {
                 self?.extensionContext?.open(url, completionHandler: { _ in
@@ -40,6 +38,28 @@ class ShareViewController: UIViewController {
             } else {
                 self?.complete()
             }
+        }
+    }
+
+    private func enqueueTranslation(text: String) {
+        let defaults = UserDefaults(suiteName: AppSettings.appGroupID)
+        let queueKey = "translationQueue"
+
+        var queue: [[String: String]] = []
+        if let data = defaults?.data(forKey: queueKey),
+           let existing = try? JSONSerialization.jsonObject(with: data) as? [[String: String]] {
+            queue = existing
+        }
+
+        let request: [String: String] = [
+            "id": UUID().uuidString,
+            "text": text
+        ]
+        queue.append(request)
+
+        if let data = try? JSONSerialization.data(withJSONObject: queue) {
+            defaults?.set(data, forKey: queueKey)
+            defaults?.synchronize()
         }
     }
 

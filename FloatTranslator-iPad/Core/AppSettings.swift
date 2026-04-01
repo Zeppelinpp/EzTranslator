@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import Security
 
 enum TranslationProvider: String, CaseIterable, Identifiable {
     case openAICompatible = "openai_compatible"
@@ -47,7 +48,7 @@ class AppSettings: ObservableObject {
     }
 
     @Published var openAIAPIKey: String {
-        didSet { save(openAIAPIKey, forKey: Keys.openAIAPIKey) }
+        didSet { Self.keychainSave(openAIAPIKey, service: Self.appGroupID, account: Keys.openAIAPIKey) }
     }
 
     private init() {
@@ -57,7 +58,7 @@ class AppSettings: ObservableObject {
         systemPrompt = defaults.string(forKey: Keys.systemPrompt) ?? Self.defaultSystemPrompt
         openAIModel = defaults.string(forKey: Keys.openAIModel) ?? Self.defaultOpenAIModel
         openAIBaseURL = defaults.string(forKey: Keys.openAIBaseURL) ?? Self.defaultOpenAIBaseURL
-        openAIAPIKey = defaults.string(forKey: Keys.openAIAPIKey) ?? ""
+        openAIAPIKey = Self.keychainLoad(service: Self.appGroupID, account: Keys.openAIAPIKey) ?? ""
     }
 
     var effectiveSystemPrompt: String {
@@ -85,5 +86,32 @@ class AppSettings: ObservableObject {
 
     private func save(_ value: String, forKey key: String) {
         defaults.set(value, forKey: key)
+    }
+
+    @discardableResult
+    private static func keychainSave(_ value: String, service: String, account: String) -> Bool {
+        guard let data = value.data(using: .utf8) else { return false }
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account,
+            kSecValueData as String: data
+        ]
+        SecItemDelete(query as CFDictionary)
+        return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
+    }
+
+    private static func keychainLoad(service: String, account: String) -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: service,
+            kSecAttrAccount as String: account,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        var result: AnyObject?
+        guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
+              let data = result as? Data else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 }
