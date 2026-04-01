@@ -10,27 +10,36 @@ class ShareViewController: UIViewController {
             return
         }
 
-        if itemProvider.hasItemConformingToTypeIdentifier("public.plain-text") {
-            itemProvider.loadItem(forTypeIdentifier: "public.plain-text", options: nil) { [weak self] (item, error) in
-                guard let text = item as? String else {
-                    self?.complete()
-                    return
-                }
+        let plainTextType = "public.plain-text"
+        let textType = "public.text"
 
-                let defaults = UserDefaults(suiteName: AppSettings.appGroupID)
-                defaults?.set(text, forKey: "pendingTranslationText")
-                defaults?.synchronize()
-
-                if let url = URL(string: "floattranslator://translate") {
-                    self?.extensionContext?.open(url, completionHandler: { _ in
-                        self?.complete()
-                    })
-                } else {
-                    self?.complete()
-                }
-            }
+        let targetType: String
+        if itemProvider.hasItemConformingToTypeIdentifier(plainTextType) {
+            targetType = plainTextType
+        } else if itemProvider.hasItemConformingToTypeIdentifier(textType) {
+            targetType = textType
         } else {
             complete()
+            return
+        }
+
+        itemProvider.loadItem(forTypeIdentifier: targetType, options: nil) { [weak self] (item, error) in
+            guard let text = item as? String else {
+                self?.complete()
+                return
+            }
+
+            let defaults = UserDefaults(suiteName: AppSettings.appGroupID)
+            defaults?.set(text, forKey: "pendingTranslationText")
+            defaults?.synchronize()
+
+            if let url = URL(string: "floattranslator://translate") {
+                self?.extensionContext?.open(url, completionHandler: { _ in
+                    self?.complete()
+                })
+            } else {
+                self?.complete()
+            }
         }
     }
 

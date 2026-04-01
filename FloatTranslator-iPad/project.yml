@@ -18,6 +18,9 @@ targets:
         CURRENT_PROJECT_VERSION: "1"
         INFOPLIST_FILE: App/Info.plist
         CODE_SIGN_ENTITLEMENTS: App/FloatTranslator-iPad.entitlements
+    dependencies:
+      - target: FloatTranslatorShareExtension
+        embed: true
   FloatTranslatorShareExtension:
     type: app-extension
     platform: iOS

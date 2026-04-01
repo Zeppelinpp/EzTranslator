@@ -35,6 +35,7 @@ class SelectionMonitor: ObservableObject {
         let cacheKey = "\(TranslatorService.shared.cacheContextKey())::\(candidate)"
 
         if let cached = translationCache[cacheKey] {
+            requestID += 1
             translatedText = cached
             isTranslating = false
             status = idleStatus
