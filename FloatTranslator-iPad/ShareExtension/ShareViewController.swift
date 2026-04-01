@@ -19,6 +19,7 @@ class ShareViewController: UIViewController {
 
                 let defaults = UserDefaults(suiteName: AppSettings.appGroupID)
                 defaults?.set(text, forKey: "pendingTranslationText")
+                defaults?.synchronize()
 
                 if let url = URL(string: "floattranslator://translate") {
                     self?.extensionContext?.open(url, completionHandler: { _ in
@@ -34,8 +35,8 @@ class ShareViewController: UIViewController {
     }
 
     private func complete() {
-        DispatchQueue.main.async {
-            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+        DispatchQueue.main.async { [weak self] in
+            self?.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
         }
     }
 }
