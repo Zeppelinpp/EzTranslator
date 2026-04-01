@@ -1,0 +1,39 @@
+{
+  "patterns": {
+    "bash_assumed_entrypoint": {
+      "examples": [
+        {
+          "error": "Exit code 127\n(eval):1: command not found: browser-use",
+          "signal": "command-not-found:browser-use",
+          "timestamp": "2026-03-27T13:34:27.795116+00:00",
+          "tool_name": "Bash"
+        }
+      ],
+      "hits": [
+        "2026-03-27T13:34:27.795113+00:00"
+      ],
+      "last_seen": "2026-03-27T13:34:27.795119+00:00",
+      "rule": "Before running project commands, inspect the repo's documented scripts or task runners and prefer them over assuming globally installed CLIs.",
+      "signal": "command-not-found:browser-use"
+    },
+    "path_must_be_verified": {
+      "examples": [
+        {
+          "error": "File does not exist. Note: your current working directory is /Users/ruipu/Documents/Raycast/FloatTranslator.",
+          "signal": "read-missing-path",
+          "timestamp": "2026-03-27T13:29:57.458113+00:00",
+          "tool_name": "Read"
+        }
+      ],
+      "hits": [
+        "2026-03-27T13:29:57.458111+00:00"
+      ],
+      "last_seen": "2026-03-27T13:29:57.458115+00:00",
+      "rule": "Before reading, editing, or using a path in a command, verify the path exists relative to the project root.",
+      "signal": "read-missing-path"
+    }
+  },
+  "project_root": "/Users/ruipu/Documents/Raycast/FloatTranslator",
+  "updated_at": "2026-03-27T15:07:36.248475+00:00",
+  "version": 1
+}
