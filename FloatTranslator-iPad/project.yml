@@ -1,0 +1,34 @@
+name: FloatTranslator-iPad
+options:
+  bundleIdPrefix: com.floattranslator
+  deploymentTarget:
+    iOS: "18.0"
+targets:
+  FloatTranslator-iPad:
+    type: application
+    platform: iOS
+    sources:
+      - path: App
+      - path: Core
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.floattranslator.ipad
+        PRODUCT_NAME: FloatTranslator
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        INFOPLIST_FILE: App/Info.plist
+        CODE_SIGN_ENTITLEMENTS: App/FloatTranslator-iPad.entitlements
+  FloatTranslatorShareExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: ShareExtension
+      - path: Core
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.floattranslator.ipad.shareextension
+        PRODUCT_NAME: FloatTranslatorShareExtension
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        INFOPLIST_FILE: ShareExtension/Info.plist
+        CODE_SIGN_ENTITLEMENTS: ShareExtension/FloatTranslatorShareExtension.entitlements
