@@ -9,6 +9,6 @@ struct FloatTranslator_iPadApp: App {
             ContentView()
                 .environmentObject(monitor)
         }
-        .handlesExternalEvents(matching: ["floattranslator://translate"])
+        .handlesExternalEvents(matching: ["translate"])
     }
 }

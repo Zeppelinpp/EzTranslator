@@ -21,7 +21,8 @@ class TranslatorService {
             settings.provider.rawValue,
             settings.effectiveSystemPrompt,
             settings.effectiveOpenAIModel,
-            settings.effectiveOpenAIBaseURL
+            settings.effectiveOpenAIBaseURL,
+            settings.effectiveOpenAIAPIKey
         ].joined(separator: "|")
     }
 
