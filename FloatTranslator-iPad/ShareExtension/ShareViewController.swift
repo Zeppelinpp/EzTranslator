@@ -13,6 +13,9 @@ class ShareViewController: UIViewController {
 
         setupUI()
         loadSharedText()
+
+        // Set compact preferred content size for iPadOS popover
+        preferredContentSize = CGSize(width: 380, height: 320)
     }
 
     private func setupUI() {
@@ -21,26 +24,30 @@ class ShareViewController: UIViewController {
         // Source Text Label
         let sourceLabel = UILabel()
         sourceLabel.text = "Source"
-        sourceLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        sourceLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         sourceLabel.textColor = UIColor.secondaryLabel
         sourceLabel.translatesAutoresizingMaskIntoConstraints = false
 
         // Source Text View
         sourceTextView.isEditable = false
+        sourceTextView.isScrollEnabled = true
+        sourceTextView.isUserInteractionEnabled = true
         sourceTextView.font = UIFont.preferredFont(forTextStyle: .body)
         sourceTextView.backgroundColor = UIColor.secondarySystemBackground
-        sourceTextView.layer.cornerRadius = 8
+        sourceTextView.layer.cornerRadius = 6
         sourceTextView.translatesAutoresizingMaskIntoConstraints = false
 
         // Translated Text Label
         let translatedLabel = UILabel()
         translatedLabel.text = "Translation"
-        translatedLabel.font = UIFont.preferredFont(forTextStyle: .caption1)
+        translatedLabel.font = UIFont.preferredFont(forTextStyle: .caption2)
         translatedLabel.textColor = UIColor.secondaryLabel
         translatedLabel.translatesAutoresizingMaskIntoConstraints = false
 
         // Translated Text View
         translatedTextView.isEditable = false
+        translatedTextView.isScrollEnabled = true
+        translatedTextView.isUserInteractionEnabled = true
         translatedTextView.font = UIFont.preferredFont(forTextStyle: .body)
         translatedTextView.backgroundColor = UIColor.secondarySystemBackground
         translatedTextView.layer.cornerRadius = 8
@@ -78,41 +85,41 @@ class ShareViewController: UIViewController {
         // Layout
         NSLayoutConstraint.activate([
             // Source Label
-            sourceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            sourceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            sourceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            sourceLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            sourceLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            sourceLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
 
             // Source Text View
             sourceTextView.topAnchor.constraint(equalTo: sourceLabel.bottomAnchor, constant: 4),
-            sourceTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            sourceTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            sourceTextView.heightAnchor.constraint(equalToConstant: 60),
+            sourceTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            sourceTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            sourceTextView.heightAnchor.constraint(equalToConstant: 80),
 
             // Translated Label
-            translatedLabel.topAnchor.constraint(equalTo: sourceTextView.bottomAnchor, constant: 16),
-            translatedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            translatedLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            translatedLabel.topAnchor.constraint(equalTo: sourceTextView.bottomAnchor, constant: 12),
+            translatedLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            translatedLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
 
             // Translated Text View
             translatedTextView.topAnchor.constraint(equalTo: translatedLabel.bottomAnchor, constant: 4),
-            translatedTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            translatedTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            translatedTextView.heightAnchor.constraint(equalToConstant: 80),
+            translatedTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            translatedTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            translatedTextView.heightAnchor.constraint(equalToConstant: 100),
 
             // Activity Indicator (centered in translated text view area)
             activityIndicator.centerXAnchor.constraint(equalTo: translatedTextView.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: translatedTextView.centerYAnchor),
 
             // Status Label
-            statusLabel.topAnchor.constraint(equalTo: translatedTextView.bottomAnchor, constant: 8),
+            statusLabel.topAnchor.constraint(equalTo: translatedTextView.bottomAnchor, constant: 6),
             statusLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 
             // Done Button
-            doneButton.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 12),
-            doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            doneButton.heightAnchor.constraint(equalToConstant: 44),
-            doneButton.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -8)
+            doneButton.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 10),
+            doneButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 12),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -12),
+            doneButton.heightAnchor.constraint(equalToConstant: 40),
+            doneButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -4)
         ])
     }
 

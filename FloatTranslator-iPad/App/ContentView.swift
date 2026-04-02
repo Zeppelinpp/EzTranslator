@@ -4,19 +4,10 @@ struct ContentView: View {
     @EnvironmentObject var monitor: SelectionMonitor
 
     var body: some View {
-        TabView {
-            TranslationView()
-                .tabItem {
-                    Label("Translate", systemImage: "globe")
-                }
-            SettingsView()
-                .tabItem {
-                    Label("Settings", systemImage: "gear")
-                }
-        }
-        .onOpenURL { url in
-            handleOpenURL(url)
-        }
+        SettingsView()
+            .onOpenURL { url in
+                handleOpenURL(url)
+            }
     }
 
     private func handleOpenURL(_ url: URL) {
