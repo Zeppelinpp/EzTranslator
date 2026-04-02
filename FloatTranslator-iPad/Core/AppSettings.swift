@@ -47,8 +47,9 @@ class AppSettings: ObservableObject {
         didSet { save(openAIBaseURL, forKey: Keys.openAIBaseURL) }
     }
 
+    // NOTE: Using UserDefaults instead of Keychain for ShareExtension compatibility
     @Published var openAIAPIKey: String {
-        didSet { Self.keychainSave(openAIAPIKey, service: Self.appGroupID, account: Keys.openAIAPIKey) }
+        didSet { save(openAIAPIKey, forKey: Keys.openAIAPIKey) }
     }
 
     private init() {
@@ -58,7 +59,37 @@ class AppSettings: ObservableObject {
         systemPrompt = defaults.string(forKey: Keys.systemPrompt) ?? Self.defaultSystemPrompt
         openAIModel = defaults.string(forKey: Keys.openAIModel) ?? Self.defaultOpenAIModel
         openAIBaseURL = defaults.string(forKey: Keys.openAIBaseURL) ?? Self.defaultOpenAIBaseURL
-        openAIAPIKey = Self.keychainLoad(service: Self.appGroupID, account: Keys.openAIAPIKey) ?? ""
+
+        // Try to load API Key from UserDefaults first, then migrate from Keychain if needed
+        let savedKey = defaults.string(forKey: Keys.openAIAPIKey) ?? ""
+        if !savedKey.isEmpty {
+            openAIAPIKey = savedKey
+        } else {
+            // Migration: try to load from old Keychain storage
+            openAIAPIKey = Self.migrateKeychainAPIKey(to: defaults) ?? ""
+        }
+    }
+
+    /// Migrate API Key from old Keychain storage to UserDefaults
+    private static func migrateKeychainAPIKey(to defaults: UserDefaults) -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: Self.appGroupID,
+            kSecAttrAccount as String: Keys.openAIAPIKey,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        var result: AnyObject?
+        guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
+              let data = result as? Data,
+              let apiKey = String(data: data, encoding: .utf8) else {
+            return nil
+        }
+        // Save to UserDefaults for future access
+        defaults.set(apiKey, forKey: Keys.openAIAPIKey)
+        // Optionally delete from Keychain
+        SecItemDelete(query as CFDictionary)
+        return apiKey
     }
 
     var effectiveSystemPrompt: String {
@@ -86,32 +117,5 @@ class AppSettings: ObservableObject {
 
     private func save(_ value: String, forKey key: String) {
         defaults.set(value, forKey: key)
-    }
-
-    @discardableResult
-    private static func keychainSave(_ value: String, service: String, account: String) -> Bool {
-        guard let data = value.data(using: .utf8) else { return false }
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
-            kSecValueData as String: data
-        ]
-        SecItemDelete(query as CFDictionary)
-        return SecItemAdd(query as CFDictionary, nil) == errSecSuccess
-    }
-
-    private static func keychainLoad(service: String, account: String) -> String? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrService as String: service,
-            kSecAttrAccount as String: account,
-            kSecReturnData as String: true,
-            kSecMatchLimit as String: kSecMatchLimitOne
-        ]
-        var result: AnyObject?
-        guard SecItemCopyMatching(query as CFDictionary, &result) == errSecSuccess,
-              let data = result as? Data else { return nil }
-        return String(data: data, encoding: .utf8)
     }
 }
