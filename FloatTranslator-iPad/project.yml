@@ -10,6 +10,8 @@ targets:
     sources:
       - path: App
       - path: Core
+    resources:
+      - path: App/Assets.xcassets
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.floattranslator.ipad

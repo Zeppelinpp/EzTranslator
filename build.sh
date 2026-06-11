@@ -9,7 +9,207 @@ SIGNING_IDENTITY="${FLOAT_TRANSLATOR_SIGNING_IDENTITY:-Apple Development: 105611
 GENERATED_DIR="$SCRIPT_DIR/GeneratedAssets"
 ICONSET_DIR="$GENERATED_DIR/AppIcon.iconset"
 
-echo "🔨 Building FloatTranslator..."
+# Function to generate iOS app icons from logo
+generate_ios_icons() {
+    local logo_path="$1"
+    local output_dir="$2"
+    
+    echo "📱 Generating iOS app icons..."
+    
+    # Create temporary directory for processing
+    local temp_dir=$(mktemp -d)
+    
+    # For FloatTranslator logo (1408x768), crop just the icon (blue bubble) without text
+    # The speech bubble is roughly at x~454, y~100 with width~500, height~400
+    # Use ffmpeg for precise cropping
+    
+    local icon_size=500
+    
+    # Crop to the icon region (centered, just the bubble without text)
+    # x=454, y=100, w=500, h=400 - then pad to square
+    ffmpeg -i "$logo_path" -vf "crop=500:400:454:100,pad=$icon_size:$icon_size:($icon_size-500)/2:($icon_size-400)/2:color=0xFEFBF7@1" -frames:v 1 -y "$temp_dir/logo_square.png" 2>/dev/null
+    
+    # Generate iPhone sizes
+    sips -Z 40 "$temp_dir/logo_square.png" --out "$output_dir/Icon-20@2x.png" >/dev/null 2>&1
+    sips -Z 60 "$temp_dir/logo_square.png" --out "$output_dir/Icon-20@3x.png" >/dev/null 2>&1
+    sips -Z 58 "$temp_dir/logo_square.png" --out "$output_dir/Icon-29@2x.png" >/dev/null 2>&1
+    sips -Z 87 "$temp_dir/logo_square.png" --out "$output_dir/Icon-29@3x.png" >/dev/null 2>&1
+    sips -Z 80 "$temp_dir/logo_square.png" --out "$output_dir/Icon-40@2x.png" >/dev/null 2>&1
+    sips -Z 120 "$temp_dir/logo_square.png" --out "$output_dir/Icon-40@3x.png" >/dev/null 2>&1
+    sips -Z 120 "$temp_dir/logo_square.png" --out "$output_dir/Icon-60@2x.png" >/dev/null 2>&1
+    sips -Z 180 "$temp_dir/logo_square.png" --out "$output_dir/Icon-60@3x.png" >/dev/null 2>&1
+    
+    # Generate iPad sizes
+    sips -Z 20 "$temp_dir/logo_square.png" --out "$output_dir/Icon-20.png" >/dev/null 2>&1
+    sips -Z 29 "$temp_dir/logo_square.png" --out "$output_dir/Icon-29.png" >/dev/null 2>&1
+    sips -Z 40 "$temp_dir/logo_square.png" --out "$output_dir/Icon-40.png" >/dev/null 2>&1
+    sips -Z 76 "$temp_dir/logo_square.png" --out "$output_dir/Icon-76.png" >/dev/null 2>&1
+    sips -Z 152 "$temp_dir/logo_square.png" --out "$output_dir/Icon-76@2x.png" >/dev/null 2>&1
+    sips -Z 167 "$temp_dir/logo_square.png" --out "$output_dir/Icon-83.5@2x.png" >/dev/null 2>&1
+    
+    # Generate App Store size
+    sips -Z 1024 "$temp_dir/logo_square.png" --out "$output_dir/Icon-1024.png" >/dev/null 2>&1
+    
+    # Clean up temp directory
+    rm -rf "$temp_dir"
+    
+    echo "✅ iOS icons generated in $output_dir"
+}
+
+# Function to create Contents.json for AppIcon.appiconset
+create_contents_json() {
+    local output_dir="$1"
+    cat > "$output_dir/Contents.json" << 'JSON'
+{
+  "images" : [
+    {
+      "filename" : "Icon-20@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Icon-20@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Icon-29@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Icon-29@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Icon-40@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Icon-40@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Icon-60@2x.png",
+      "idiom" : "iphone",
+      "scale" : "2x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "Icon-60@3x.png",
+      "idiom" : "iphone",
+      "scale" : "3x",
+      "size" : "60x60"
+    },
+    {
+      "filename" : "Icon-20.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Icon-20@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "20x20"
+    },
+    {
+      "filename" : "Icon-29.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Icon-29@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "29x29"
+    },
+    {
+      "filename" : "Icon-40.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Icon-40@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "40x40"
+    },
+    {
+      "filename" : "Icon-76.png",
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "Icon-76@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "76x76"
+    },
+    {
+      "filename" : "Icon-83.5@2x.png",
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "size" : "83.5x83.5"
+    },
+    {
+      "filename" : "Icon-1024.png",
+      "idiom" : "ios-marketing",
+      "scale" : "1x",
+      "size" : "1024x1024"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
+JSON
+}
+
+# Build for iOS (generate assets)
+if [ "$1" == "ios" ] || [ "$1" == "ipad" ]; then
+    echo "🔨 Building FloatTranslator for iOS..."
+    
+    # Check for logo file
+    LOGO_PATH="${2:-$HOME/Desktop/FloatTranslatorLogo.jpg}"
+    if [ ! -f "$LOGO_PATH" ]; then
+        echo "❌ Logo not found at $LOGO_PATH"
+        echo "Usage: $0 ios [path_to_logo]"
+        exit 1
+    fi
+    
+    IOS_ASSETS_DIR="$SCRIPT_DIR/FloatTranslator-iPad/App/Assets.xcassets/AppIcon.appiconset"
+    mkdir -p "$IOS_ASSETS_DIR"
+    
+    # Generate iOS icons
+    generate_ios_icons "$LOGO_PATH" "$IOS_ASSETS_DIR"
+    
+    # Create Contents.json
+    create_contents_json "$IOS_ASSETS_DIR"
+    
+    # Regenerate Xcode project
+    cd "$SCRIPT_DIR/FloatTranslator-iPad"
+    xcodegen generate
+    
+    echo "✅ iOS assets generated. Open FloatTranslator-iPad.xcodeproj in Xcode to build."
+    exit 0
+fi
+
+# Default: Build for macOS
+echo "🔨 Building FloatTranslator for macOS..."
 
 swift Scripts/generate_assets.swift "$GENERATED_DIR"
 
