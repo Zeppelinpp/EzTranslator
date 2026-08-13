@@ -173,7 +173,9 @@ final class OllamaModelDiscovery: ObservableObject {
 
     func refresh(completion: (([String]) -> Void)? = nil) {
         dataTask?.cancel()
-        state = .loading
+        if state == .idle {
+            state = .loading
+        }
 
         var request = URLRequest(url: modelsURL)
         request.timeoutInterval = 3
@@ -862,43 +864,37 @@ struct SettingsView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 12) {
-                Image(systemName: "character.bubble.fill")
-                    .font(.system(size: 26))
-                    .foregroundStyle(.blue)
-
-                VStack(alignment: .leading, spacing: 2) {
-                    Text("FloatTranslator")
-                        .font(.title2.weight(.semibold))
-                    Text("Translation preferences and permissions")
-                        .font(.subheadline)
-                        .foregroundStyle(.secondary)
-                }
-
+            HStack {
+                Text("FloatTranslator Settings")
+                    .font(.title3.weight(.semibold))
                 Spacer()
             }
-            .padding(.horizontal, 24)
-            .padding(.vertical, 18)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 14)
 
             Divider()
 
             ScrollView {
-                VStack(spacing: 14) {
+                VStack(spacing: 12) {
                     SettingsCard(
                         title: "Translation",
-                        subtitle: "Choose the service and model used for translations.",
-                        systemImage: "sparkles"
+                        subtitle: "Choose the service and model used for translations."
                     ) {
-                        VStack(spacing: 12) {
+                        VStack(spacing: 10) {
                             settingsRow("Provider") {
-                                Picker("Provider", selection: $settings.provider) {
+                                Menu {
                                     ForEach(TranslationProvider.allCases) { provider in
-                                        Text(provider.displayName).tag(provider)
+                                        Button {
+                                            settings.provider = provider
+                                        } label: {
+                                            Text(provider.displayName)
+                                        }
                                     }
+                                } label: {
+                                    dropdownLabel(settings.provider.displayName)
                                 }
-                                .labelsHidden()
-                                .pickerStyle(.segmented)
-                                .frame(maxWidth: 360)
+                                .menuStyle(.borderlessButton)
+                                .menuIndicator(.hidden)
                             }
 
                             Divider()
@@ -913,13 +909,12 @@ struct SettingsView: View {
 
                     SettingsCard(
                         title: "System Prompt",
-                        subtitle: "Control the translation style and output behavior.",
-                        systemImage: "text.quote"
+                        subtitle: "Control the translation style and output behavior."
                     ) {
                         VStack(spacing: 10) {
                             TextEditor(text: $settings.systemPrompt)
                                 .font(.system(size: 12, design: .monospaced))
-                                .frame(minHeight: 150)
+                                .frame(minHeight: 105)
                                 .padding(6)
                                 .background(Color(NSColor.textBackgroundColor))
                                 .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
@@ -945,8 +940,7 @@ struct SettingsView: View {
 
                     SettingsCard(
                         title: "Permissions",
-                        subtitle: "Required to read hovered and selected text.",
-                        systemImage: "lock.shield"
+                        subtitle: "Required to read hovered and selected text."
                     ) {
                         VStack(spacing: 12) {
                             permissionRow(
@@ -967,10 +961,10 @@ struct SettingsView: View {
                         }
                     }
                 }
-                .padding(20)
+                .padding(16)
             }
         }
-        .frame(width: 680, height: 640)
+        .frame(width: 620, height: 560)
         .background(Color(NSColor.windowBackgroundColor))
         .onAppear {
             if settings.provider == .ollama {
@@ -1001,14 +995,6 @@ struct SettingsView: View {
         case .available:
             settingsRow("Model") {
                 HStack(spacing: 8) {
-                    Picker("Model", selection: $settings.ollamaModel) {
-                        ForEach(ollamaDiscovery.models, id: \.self) { model in
-                            Text(model).tag(model)
-                        }
-                    }
-                    .labelsHidden()
-                    .frame(maxWidth: 320)
-
                     Button {
                         refreshOllamaModels()
                     } label: {
@@ -1016,6 +1002,18 @@ struct SettingsView: View {
                     }
                     .buttonStyle(.borderless)
                     .help("Refresh local models")
+
+                    Menu {
+                        ForEach(ollamaDiscovery.models, id: \.self) { model in
+                            Button(model) {
+                                settings.ollamaModel = model
+                            }
+                        }
+                    } label: {
+                        dropdownLabel(settings.ollamaModel)
+                    }
+                    .menuStyle(.borderlessButton)
+                    .menuIndicator(.hidden)
                 }
             }
 
@@ -1075,17 +1073,34 @@ struct SettingsView: View {
             Text(title)
                 .font(.system(size: 13, weight: .medium))
                 .frame(width: 82, alignment: .leading)
+            Spacer(minLength: 12)
             content()
-            Spacer(minLength: 0)
         }
+        .frame(maxWidth: .infinity)
+    }
+
+    private func dropdownLabel(_ title: String) -> some View {
+        HStack(spacing: 8) {
+            Text(title)
+                .lineLimit(1)
+                .truncationMode(.middle)
+            Spacer(minLength: 8)
+            Image(systemName: "chevron.up.chevron.down")
+                .font(.system(size: 9, weight: .semibold))
+                .foregroundStyle(.secondary)
+        }
+        .padding(.horizontal, 10)
+        .frame(width: 240, height: 26)
+        .background(Color(NSColor.controlColor))
+        .clipShape(RoundedRectangle(cornerRadius: 6, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 6, style: .continuous)
+                .stroke(Color(NSColor.separatorColor).opacity(0.55), lineWidth: 1)
+        )
     }
 
     private func ollamaNotice(title: String, detail: String, color: Color) -> some View {
         HStack(alignment: .top, spacing: 10) {
-            Image(systemName: "exclamationmark.circle.fill")
-                .foregroundStyle(color)
-                .padding(.top, 1)
-
             VStack(alignment: .leading, spacing: 3) {
                 Text(title)
                     .font(.system(size: 13, weight: .medium))
@@ -1096,9 +1111,13 @@ struct SettingsView: View {
 
             Spacer()
 
-            Button("Refresh") {
+            Button {
                 refreshOllamaModels()
+            } label: {
+                Image(systemName: "arrow.clockwise")
             }
+            .buttonStyle(.borderless)
+            .help("Refresh local models")
         }
         .padding(10)
         .background(color.opacity(0.08))
@@ -1139,44 +1158,33 @@ struct SettingsView: View {
 struct SettingsCard<Content: View>: View {
     let title: String
     let subtitle: String
-    let systemImage: String
     let content: Content
 
     init(
         title: String,
         subtitle: String,
-        systemImage: String,
         @ViewBuilder content: () -> Content
     ) {
         self.title = title
         self.subtitle = subtitle
-        self.systemImage = systemImage
         self.content = content()
     }
 
     var body: some View {
-        HStack(alignment: .top, spacing: 14) {
-            Image(systemName: systemImage)
-                .font(.system(size: 15, weight: .semibold))
-                .foregroundStyle(.blue)
-                .frame(width: 30, height: 30)
-                .background(Color.blue.opacity(0.1))
-                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
-
-            VStack(alignment: .leading, spacing: 14) {
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(title)
-                        .font(.headline)
-                    Text(subtitle)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-
-                content
+        VStack(alignment: .leading, spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.headline)
+                Text(subtitle)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
             }
+
+            content
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(16)
+        .padding(14)
         .background(Color(NSColor.controlBackgroundColor))
         .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
         .overlay(
@@ -1209,7 +1217,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var lastHoveredWord: String = ""
     var lastSampledMouseLocation: CGPoint?
     let hoverMovementThreshold: CGFloat = 10
-    let activationDelay: TimeInterval = 0.1
+    let activationDelay: TimeInterval = 0.05
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupMenu()
@@ -1647,7 +1655,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             )
 
             let window = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 680, height: 640),
+                contentRect: NSRect(x: 0, y: 0, width: 620, height: 560),
                 styleMask: [.titled, .closable, .miniaturizable],
                 backing: .buffered,
                 defer: false
