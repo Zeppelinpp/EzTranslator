@@ -9,6 +9,7 @@ private let floatingWindowMinWidth: CGFloat = 220
 private let floatingWindowMaxWidth: CGFloat = 540
 private let floatingWindowMinHeight: CGFloat = 72
 private let floatingWindowMaxHeight: CGFloat = 420
+private let floatingWindowCornerRadius: CGFloat = 10
 
 enum TranslationProvider: String, CaseIterable, Identifiable {
     case ollama
@@ -144,6 +145,85 @@ struct OllamaOptions: Codable {
 
 struct OllamaResponse: Codable {
     let response: String
+}
+
+struct OllamaLocalModel: Decodable {
+    let name: String
+    let capabilities: [String]?
+}
+
+struct OllamaModelListResponse: Decodable {
+    let models: [OllamaLocalModel]
+}
+
+enum OllamaDiscoveryState: Equatable {
+    case idle
+    case loading
+    case available
+    case empty
+    case unavailable(String)
+}
+
+final class OllamaModelDiscovery: ObservableObject {
+    @Published private(set) var models: [String] = []
+    @Published private(set) var state: OllamaDiscoveryState = .idle
+
+    private let modelsURL = URL(string: "http://localhost:11434/api/tags")!
+    private var dataTask: URLSessionDataTask?
+
+    func refresh(completion: (([String]) -> Void)? = nil) {
+        dataTask?.cancel()
+        state = .loading
+
+        var request = URLRequest(url: modelsURL)
+        request.timeoutInterval = 3
+
+        dataTask = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            DispatchQueue.main.async {
+                guard let self else { return }
+
+                if let error = error as? URLError, error.code == .cancelled {
+                    return
+                }
+
+                if let error {
+                    self.models = []
+                    self.state = .unavailable(error.localizedDescription)
+                    return
+                }
+
+                guard let httpResponse = response as? HTTPURLResponse,
+                      (200..<300).contains(httpResponse.statusCode),
+                      let data else {
+                    self.models = []
+                    self.state = .unavailable("Ollama returned an unexpected response.")
+                    return
+                }
+
+                do {
+                    let response = try JSONDecoder().decode(OllamaModelListResponse.self, from: data)
+                    let translationModels = response.models.filter { model in
+                        guard let capabilities = model.capabilities else { return true }
+                        return capabilities.contains("completion")
+                    }
+                    let modelNames = Array(Set(translationModels.map(\.name)))
+                        .sorted { $0.localizedCaseInsensitiveCompare($1) == .orderedAscending }
+
+                    self.models = modelNames
+                    self.state = modelNames.isEmpty ? .empty : .available
+                    completion?(modelNames)
+                } catch {
+                    self.models = []
+                    self.state = .unavailable("The local model list could not be read.")
+                }
+            }
+        }
+        dataTask?.resume()
+    }
+
+    deinit {
+        dataTask?.cancel()
+    }
 }
 
 struct OpenAIChatMessage: Codable {
@@ -765,7 +845,11 @@ struct FloatingWindowView: View {
             .padding(.bottom, 8)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-        .background(Color(NSColor.windowBackgroundColor))
+        .background(
+            RoundedRectangle(cornerRadius: floatingWindowCornerRadius, style: .continuous)
+                .fill(Color(NSColor.windowBackgroundColor))
+        )
+        .clipShape(RoundedRectangle(cornerRadius: floatingWindowCornerRadius, style: .continuous))
     }
 }
 
@@ -774,60 +858,331 @@ struct SettingsView: View {
     let onClearCache: () -> Void
     let onRequestScreenRecordingPermission: () -> Void
     let onOpenAccessibilitySettings: () -> Void
+    @StateObject private var ollamaDiscovery = OllamaModelDiscovery()
 
     var body: some View {
-        Form {
-            Section("Translation") {
-                Picker("Provider", selection: $settings.provider) {
-                    ForEach(TranslationProvider.allCases) { provider in
-                        Text(provider.displayName).tag(provider)
-                    }
-                }
+        VStack(spacing: 0) {
+            HStack(spacing: 12) {
+                Image(systemName: "character.bubble.fill")
+                    .font(.system(size: 26))
+                    .foregroundStyle(.blue)
 
-                if settings.provider == .ollama {
-                    TextField("Ollama Model", text: $settings.ollamaModel)
-                    Text("Endpoint: http://localhost:11434/api/generate")
-                        .font(.caption)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("FloatTranslator")
+                        .font(.title2.weight(.semibold))
+                    Text("Translation preferences and permissions")
+                        .font(.subheadline)
                         .foregroundStyle(.secondary)
-                } else {
-                    TextField("Model", text: $settings.openAIModel)
-                    TextField("Base URL", text: $settings.openAIBaseURL)
-                    SecureField("API Key (optional)", text: $settings.openAIAPIKey)
                 }
+
+                Spacer()
             }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 18)
 
-            Section("System Prompt") {
-                TextEditor(text: $settings.systemPrompt)
-                    .font(.system(size: 12, design: .monospaced))
-                    .frame(minHeight: 180)
+            Divider()
 
-                HStack {
-                    Button("Reset Prompt") {
-                        settings.resetSystemPrompt()
-                        onClearCache()
+            ScrollView {
+                VStack(spacing: 14) {
+                    SettingsCard(
+                        title: "Translation",
+                        subtitle: "Choose the service and model used for translations.",
+                        systemImage: "sparkles"
+                    ) {
+                        VStack(spacing: 12) {
+                            settingsRow("Provider") {
+                                Picker("Provider", selection: $settings.provider) {
+                                    ForEach(TranslationProvider.allCases) { provider in
+                                        Text(provider.displayName).tag(provider)
+                                    }
+                                }
+                                .labelsHidden()
+                                .pickerStyle(.segmented)
+                                .frame(maxWidth: 360)
+                            }
+
+                            Divider()
+
+                            if settings.provider == .ollama {
+                                ollamaConfiguration
+                            } else {
+                                openAIConfiguration
+                            }
+                        }
                     }
 
-                    Spacer()
+                    SettingsCard(
+                        title: "System Prompt",
+                        subtitle: "Control the translation style and output behavior.",
+                        systemImage: "text.quote"
+                    ) {
+                        VStack(spacing: 10) {
+                            TextEditor(text: $settings.systemPrompt)
+                                .font(.system(size: 12, design: .monospaced))
+                                .frame(minHeight: 150)
+                                .padding(6)
+                                .background(Color(NSColor.textBackgroundColor))
+                                .clipShape(RoundedRectangle(cornerRadius: 7, style: .continuous))
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 7, style: .continuous)
+                                        .stroke(Color(NSColor.separatorColor), lineWidth: 1)
+                                )
 
-                    Button("Clear Translation Cache") {
-                        onClearCache()
+                            HStack {
+                                Button("Reset to Default") {
+                                    settings.resetSystemPrompt()
+                                    onClearCache()
+                                }
+
+                                Spacer()
+
+                                Button("Clear Translation Cache") {
+                                    onClearCache()
+                                }
+                            }
+                        }
+                    }
+
+                    SettingsCard(
+                        title: "Permissions",
+                        subtitle: "Required to read hovered and selected text.",
+                        systemImage: "lock.shield"
+                    ) {
+                        VStack(spacing: 12) {
+                            permissionRow(
+                                title: "Screen Recording",
+                                detail: "Reads the word beneath the pointer using OCR.",
+                                buttonTitle: "Request Access",
+                                action: onRequestScreenRecordingPermission
+                            )
+
+                            Divider()
+
+                            permissionRow(
+                                title: "Accessibility",
+                                detail: "Reads text selected in other applications.",
+                                buttonTitle: "Open Settings",
+                                action: onOpenAccessibilitySettings
+                            )
+                        }
                     }
                 }
-            }
-
-            Section("Permissions") {
-                Button("Request Screen Recording Permission") {
-                    onRequestScreenRecordingPermission()
-                }
-
-                Button("Open Accessibility Settings") {
-                    onOpenAccessibilitySettings()
-                }
+                .padding(20)
             }
         }
-        .formStyle(.grouped)
-        .padding(14)
-        .frame(width: 620, height: 560)
+        .frame(width: 680, height: 640)
+        .background(Color(NSColor.windowBackgroundColor))
+        .onAppear {
+            if settings.provider == .ollama {
+                refreshOllamaModels()
+            }
+        }
+        .onReceive(settings.$provider.dropFirst()) { provider in
+            if provider == .ollama {
+                refreshOllamaModels()
+            }
+        }
+    }
+
+    @ViewBuilder
+    private var ollamaConfiguration: some View {
+        switch ollamaDiscovery.state {
+        case .idle, .loading:
+            settingsRow("Model") {
+                HStack(spacing: 8) {
+                    ProgressView()
+                        .controlSize(.small)
+                    Text("Loading local models…")
+                        .foregroundStyle(.secondary)
+                    Spacer()
+                }
+            }
+
+        case .available:
+            settingsRow("Model") {
+                HStack(spacing: 8) {
+                    Picker("Model", selection: $settings.ollamaModel) {
+                        ForEach(ollamaDiscovery.models, id: \.self) { model in
+                            Text(model).tag(model)
+                        }
+                    }
+                    .labelsHidden()
+                    .frame(maxWidth: 320)
+
+                    Button {
+                        refreshOllamaModels()
+                    } label: {
+                        Image(systemName: "arrow.clockwise")
+                    }
+                    .buttonStyle(.borderless)
+                    .help("Refresh local models")
+                }
+            }
+
+            HStack(spacing: 6) {
+                Circle()
+                    .fill(Color.green)
+                    .frame(width: 7, height: 7)
+                Text("Ollama is running · Models loaded from the local service")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                Spacer()
+            }
+
+        case .empty:
+            ollamaNotice(
+                title: "Ollama is running, but no local models were found.",
+                detail: "Install one with ollama pull, then refresh the list.",
+                color: .orange
+            )
+
+        case .unavailable(let detail):
+            ollamaNotice(
+                title: "Ollama is not available.",
+                detail: "Start the Ollama service and try again. \(detail)",
+                color: .red
+            )
+        }
+    }
+
+    private var openAIConfiguration: some View {
+        VStack(spacing: 10) {
+            settingsRow("Model") {
+                TextField("gpt-4.1-mini", text: $settings.openAIModel)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: 360)
+            }
+
+            settingsRow("Base URL") {
+                TextField("https://api.openai.com/v1", text: $settings.openAIBaseURL)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: 360)
+            }
+
+            settingsRow("API Key") {
+                SecureField("Optional", text: $settings.openAIAPIKey)
+                    .textFieldStyle(.roundedBorder)
+                    .frame(maxWidth: 360)
+            }
+        }
+    }
+
+    private func settingsRow<Content: View>(
+        _ title: String,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        HStack(alignment: .center, spacing: 16) {
+            Text(title)
+                .font(.system(size: 13, weight: .medium))
+                .frame(width: 82, alignment: .leading)
+            content()
+            Spacer(minLength: 0)
+        }
+    }
+
+    private func ollamaNotice(title: String, detail: String, color: Color) -> some View {
+        HStack(alignment: .top, spacing: 10) {
+            Image(systemName: "exclamationmark.circle.fill")
+                .foregroundStyle(color)
+                .padding(.top, 1)
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text(title)
+                    .font(.system(size: 13, weight: .medium))
+                Text(detail)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Button("Refresh") {
+                refreshOllamaModels()
+            }
+        }
+        .padding(10)
+        .background(color.opacity(0.08))
+        .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+    }
+
+    private func permissionRow(
+        title: String,
+        detail: String,
+        buttonTitle: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(.system(size: 13, weight: .medium))
+                Text(detail)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            Spacer()
+
+            Button(buttonTitle, action: action)
+        }
+    }
+
+    private func refreshOllamaModels() {
+        ollamaDiscovery.refresh { models in
+            guard !models.isEmpty else { return }
+            if !models.contains(settings.ollamaModel) {
+                settings.ollamaModel = models[0]
+            }
+        }
+    }
+}
+
+struct SettingsCard<Content: View>: View {
+    let title: String
+    let subtitle: String
+    let systemImage: String
+    let content: Content
+
+    init(
+        title: String,
+        subtitle: String,
+        systemImage: String,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.systemImage = systemImage
+        self.content = content()
+    }
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 14) {
+            Image(systemName: systemImage)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(.blue)
+                .frame(width: 30, height: 30)
+                .background(Color.blue.opacity(0.1))
+                .clipShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+
+            VStack(alignment: .leading, spacing: 14) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text(title)
+                        .font(.headline)
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                content
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(16)
+        .background(Color(NSColor.controlBackgroundColor))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(Color(NSColor.separatorColor).opacity(0.65), lineWidth: 1)
+        )
     }
 }
 
@@ -854,7 +1209,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var lastHoveredWord: String = ""
     var lastSampledMouseLocation: CGPoint?
     let hoverMovementThreshold: CGFloat = 10
-    let activationDelay: TimeInterval = 0.5
+    let activationDelay: TimeInterval = 0.1
 
     func applicationDidFinishLaunching(_ notification: Notification) {
         setupMenu()
@@ -897,6 +1252,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         )
 
         window.contentView = NSHostingView(rootView: contentView)
+        window.isOpaque = false
+        window.backgroundColor = .clear
         window.isFloatingPanel = true
         window.level = .floating
         window.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .transient]
@@ -1290,7 +1647,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             )
 
             let window = NSWindow(
-                contentRect: NSRect(x: 0, y: 0, width: 620, height: 560),
+                contentRect: NSRect(x: 0, y: 0, width: 680, height: 640),
                 styleMask: [.titled, .closable, .miniaturizable],
                 backing: .buffered,
                 defer: false

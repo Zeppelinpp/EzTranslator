@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0327DE6706C0A46E3FD1D085 /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92EB238D596F20F1D53189 /* TranslationModels.swift */; };
+		206BA8D6C55D096DECDC67C0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD706C87399662207A3067D4 /* ContentView.swift */; };
+		29B08B521A95DE6CA74C6568 /* TranslateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D9C95D3B8543481BE6D3B8 /* TranslateIntent.swift */; };
+		36EEA286C6094D346AB9C1C3 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C42CD017527E3A4BB8A5D3 /* AppSettings.swift */; };
+		3865C768D96C7592F87DE53C /* FloatTranslatorShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76495F3BDB4DA3D8C29AA20 /* FloatTranslatorShortcuts.swift */; };
+		43CF7CEE1413973F0CB4D1C1 /* SelectionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CDA94C6BFF5332F8FA6630 /* SelectionMonitor.swift */; };
+		44F359DB8BF8312C3B4727FF /* FloatTranslatorShareExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2408B23245FA4DCBB1C8A88F /* FloatTranslatorShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		744060B97F64A80CF5F66119 /* FloatTranslatorShortcuts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76495F3BDB4DA3D8C29AA20 /* FloatTranslatorShortcuts.swift */; };
+		78F1AE9B0447A8FEC06DD595 /* FloatTranslator_iPadApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61866DAC868045E6125ABA7A /* FloatTranslator_iPadApp.swift */; };
+		9886DE377DC8DC55BF316AA4 /* TranslatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E86F07C9B609A3FCD0CB1 /* TranslatorService.swift */; };
+		9C7229784D782FCC2C34994F /* TranslationModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E92EB238D596F20F1D53189 /* TranslationModels.swift */; };
+		A4101CCDFAB3ABAC52011C69 /* SelectionMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CDA94C6BFF5332F8FA6630 /* SelectionMonitor.swift */; };
+		ADC2BD7D0A538924529D000A /* TranslateIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3D9C95D3B8543481BE6D3B8 /* TranslateIntent.swift */; };
+		C247A5797D21EFA9C37A82DA /* TranslatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E86F07C9B609A3FCD0CB1 /* TranslatorService.swift */; };
+		D024FFF19DE2482BEE72C9E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 769FDFF4AA230CF3CFF9F5EF /* Assets.xcassets */; };
+		E7D7AD2A572BC8D968FC6D52 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6A655873F4091A1DDCE4D9 /* SettingsView.swift */; };
+		EA4F88E5503B92E61737CCA1 /* TranslationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBA55FC62AE51D385B47BC59 /* TranslationView.swift */; };
+		ED4733B6688D44638A3D0283 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1C96F13452FDB949CBDAC74 /* ShareViewController.swift */; };
+		F0842D7A68AF8AD3017B3FB9 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C42CD017527E3A4BB8A5D3 /* AppSettings.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FC4A8C8F1626A8E33C86E480 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9FAA9AB1A82260141696208E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EF732F3269D53295BD469BAD;
+			remoteInfo = FloatTranslatorShareExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1B06657C5650B55C8A811722 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				44F359DB8BF8312C3B4727FF /* FloatTranslatorShareExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		2408B23245FA4DCBB1C8A88F /* FloatTranslatorShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = FloatTranslatorShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B2ADA6CA2C7F824A9182259 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		375E86F07C9B609A3FCD0CB1 /* TranslatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslatorService.swift; sourceTree = "<group>"; };
+		400A4EC1464A14A077311D2B /* FloatTranslator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FloatTranslator.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		44C42CD017527E3A4BB8A5D3 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		61866DAC868045E6125ABA7A /* FloatTranslator_iPadApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatTranslator_iPadApp.swift; sourceTree = "<group>"; };
+		769FDFF4AA230CF3CFF9F5EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7E92EB238D596F20F1D53189 /* TranslationModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationModels.swift; sourceTree = "<group>"; };
+		8B76C4EE72603068AA8B6180 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8F6A655873F4091A1DDCE4D9 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		A2CDA94C6BFF5332F8FA6630 /* SelectionMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionMonitor.swift; sourceTree = "<group>"; };
+		A6971495282407B36230B7B0 /* FloatTranslator-iPad.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "FloatTranslator-iPad.entitlements"; sourceTree = "<group>"; };
+		B76495F3BDB4DA3D8C29AA20 /* FloatTranslatorShortcuts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatTranslatorShortcuts.swift; sourceTree = "<group>"; };
+		CBA55FC62AE51D385B47BC59 /* TranslationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationView.swift; sourceTree = "<group>"; };
+		CD706C87399662207A3067D4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ED4F922F4F5011F717CC0172 /* FloatTranslatorShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FloatTranslatorShareExtension.entitlements; sourceTree = "<group>"; };
+		F1C96F13452FDB949CBDAC74 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		F3D9C95D3B8543481BE6D3B8 /* TranslateIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslateIntent.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		9DE00AD33F3F71BD5DCA6BFE /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				44C42CD017527E3A4BB8A5D3 /* AppSettings.swift */,
+				B76495F3BDB4DA3D8C29AA20 /* FloatTranslatorShortcuts.swift */,
+				A2CDA94C6BFF5332F8FA6630 /* SelectionMonitor.swift */,
+				F3D9C95D3B8543481BE6D3B8 /* TranslateIntent.swift */,
+				7E92EB238D596F20F1D53189 /* TranslationModels.swift */,
+				375E86F07C9B609A3FCD0CB1 /* TranslatorService.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		A3B423AAF3A9249C43C718DE = {
+			isa = PBXGroup;
+			children = (
+				B5D3D5DE4E10CEBEE702C9E0 /* App */,
+				9DE00AD33F3F71BD5DCA6BFE /* Core */,
+				B58937399170DA034265DC02 /* ShareExtension */,
+				E757453BCE7D9FEA590E8421 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B58937399170DA034265DC02 /* ShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				ED4F922F4F5011F717CC0172 /* FloatTranslatorShareExtension.entitlements */,
+				8B76C4EE72603068AA8B6180 /* Info.plist */,
+				F1C96F13452FDB949CBDAC74 /* ShareViewController.swift */,
+			);
+			path = ShareExtension;
+			sourceTree = "<group>";
+		};
+		B5D3D5DE4E10CEBEE702C9E0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				769FDFF4AA230CF3CFF9F5EF /* Assets.xcassets */,
+				CD706C87399662207A3067D4 /* ContentView.swift */,
+				61866DAC868045E6125ABA7A /* FloatTranslator_iPadApp.swift */,
+				A6971495282407B36230B7B0 /* FloatTranslator-iPad.entitlements */,
+				2B2ADA6CA2C7F824A9182259 /* Info.plist */,
+				8F6A655873F4091A1DDCE4D9 /* SettingsView.swift */,
+				CBA55FC62AE51D385B47BC59 /* TranslationView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		E757453BCE7D9FEA590E8421 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				400A4EC1464A14A077311D2B /* FloatTranslator.app */,
+				2408B23245FA4DCBB1C8A88F /* FloatTranslatorShareExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABEEA70745932CFA7FEB26D5 /* FloatTranslator-iPad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B97FBFE484219BC0CA28FC5 /* Build configuration list for PBXNativeTarget "FloatTranslator-iPad" */;
+			buildPhases = (
+				9E5FA77F4C3DC62E2328270F /* Sources */,
+				20397052492D926B5F2DD36A /* Resources */,
+				1B06657C5650B55C8A811722 /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				21F2F136FD66C8AF0C6E47CC /* PBXTargetDependency */,
+			);
+			name = "FloatTranslator-iPad";
+			packageProductDependencies = (
+			);
+			productName = "FloatTranslator-iPad";
+			productReference = 400A4EC1464A14A077311D2B /* FloatTranslator.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EF732F3269D53295BD469BAD /* FloatTranslatorShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EDB314E50942F7D1544ABE24 /* Build configuration list for PBXNativeTarget "FloatTranslatorShareExtension" */;
+			buildPhases = (
+				DCD1B80B3F5C7ABF70A8FDBC /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FloatTranslatorShareExtension;
+			packageProductDependencies = (
+			);
+			productName = FloatTranslatorShareExtension;
+			productReference = 2408B23245FA4DCBB1C8A88F /* FloatTranslatorShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9FAA9AB1A82260141696208E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+			};
+			buildConfigurationList = 6C47969090DB4BD9382B4E85 /* Build configuration list for PBXProject "FloatTranslator-iPad" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = A3B423AAF3A9249C43C718DE;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = E757453BCE7D9FEA590E8421 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABEEA70745932CFA7FEB26D5 /* FloatTranslator-iPad */,
+				EF732F3269D53295BD469BAD /* FloatTranslatorShareExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20397052492D926B5F2DD36A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D024FFF19DE2482BEE72C9E4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9E5FA77F4C3DC62E2328270F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				36EEA286C6094D346AB9C1C3 /* AppSettings.swift in Sources */,
+				206BA8D6C55D096DECDC67C0 /* ContentView.swift in Sources */,
+				3865C768D96C7592F87DE53C /* FloatTranslatorShortcuts.swift in Sources */,
+				78F1AE9B0447A8FEC06DD595 /* FloatTranslator_iPadApp.swift in Sources */,
+				A4101CCDFAB3ABAC52011C69 /* SelectionMonitor.swift in Sources */,
+				E7D7AD2A572BC8D968FC6D52 /* SettingsView.swift in Sources */,
+				ADC2BD7D0A538924529D000A /* TranslateIntent.swift in Sources */,
+				9C7229784D782FCC2C34994F /* TranslationModels.swift in Sources */,
+				EA4F88E5503B92E61737CCA1 /* TranslationView.swift in Sources */,
+				9886DE377DC8DC55BF316AA4 /* TranslatorService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DCD1B80B3F5C7ABF70A8FDBC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F0842D7A68AF8AD3017B3FB9 /* AppSettings.swift in Sources */,
+				744060B97F64A80CF5F66119 /* FloatTranslatorShortcuts.swift in Sources */,
+				43CF7CEE1413973F0CB4D1C1 /* SelectionMonitor.swift in Sources */,
+				ED4733B6688D44638A3D0283 /* ShareViewController.swift in Sources */,
+				29B08B521A95DE6CA74C6568 /* TranslateIntent.swift in Sources */,
+				0327DE6706C0A46E3FD1D085 /* TranslationModels.swift in Sources */,
+				C247A5797D21EFA9C37A82DA /* TranslatorService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		21F2F136FD66C8AF0C6E47CC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EF732F3269D53295BD469BAD /* FloatTranslatorShareExtension */;
+			targetProxy = FC4A8C8F1626A8E33C86E480 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1EF1A1BEA3D632B97E9748BF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		2CA63370D069024D577A9667 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "App/FloatTranslator-iPad.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K8LU3UT9KU;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.floattranslator.ipad;
+				PRODUCT_NAME = FloatTranslator;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C47C54BA6A5EFC45D176BC8B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/FloatTranslatorShareExtension.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K8LU3UT9KU;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.floattranslator.ipad.shareextension;
+				PRODUCT_NAME = FloatTranslatorShareExtension;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E7EC2924735162B246B167E5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		E8E05A6F165952ED18A8CF3F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = ShareExtension/FloatTranslatorShareExtension.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K8LU3UT9KU;
+				INFOPLIST_FILE = ShareExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.floattranslator.ipad.shareextension;
+				PRODUCT_NAME = FloatTranslatorShareExtension;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F1821DE58796253BAF0E6AA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "App/FloatTranslator-iPad.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = K8LU3UT9KU;
+				INFOPLIST_FILE = App/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.floattranslator.ipad;
+				PRODUCT_NAME = FloatTranslator;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2B97FBFE484219BC0CA28FC5 /* Build configuration list for PBXNativeTarget "FloatTranslator-iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2CA63370D069024D577A9667 /* Debug */,
+				F1821DE58796253BAF0E6AA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6C47969090DB4BD9382B4E85 /* Build configuration list for PBXProject "FloatTranslator-iPad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1EF1A1BEA3D632B97E9748BF /* Debug */,
+				E7EC2924735162B246B167E5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EDB314E50942F7D1544ABE24 /* Build configuration list for PBXNativeTarget "FloatTranslatorShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C47C54BA6A5EFC45D176BC8B /* Debug */,
+				E8E05A6F165952ED18A8CF3F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9FAA9AB1A82260141696208E /* Project object */;
+}
